@@ -1,47 +1,32 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-    </div>
+  <header class="centered">
+    <h1 class="padding-top-large padding-bottom-medium large-border">Flip the coin</h1>
+    <p>Press the coin or the button to flip the coin</p>
   </header>
-
-  <main>
-    <TheWelcome />
-  </main>
 </template>
 
 <style scoped>
-header {
-  line-height: 1.5;
+.centered {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
+.padding-top-large {
+  padding-top: 2rem;
 }
 
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
+.padding-bottom-medium {
+  padding-bottom: 1rem;
+}
 
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
+.large-border {
+  /* TODO: Because for some reason, this is the hardest thing to
+     do on this whole project, the text-shadow given on the website
+     isn't even good compared to the one shown
+  */
 }
 </style>
