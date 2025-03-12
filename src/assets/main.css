@@ -5,8 +5,48 @@
   --color-bg: #404A65;
   --color-dark: #35383F;
   --color-accent: #1F6FB0;
+  --color-accent-dark: #23649b;
   --font-family: "Kanit", var(--font-family-fallback);
   --font-family-fallback: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, sans-serif;
+}
+
+.centered {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.gap-medium {
+  gap: 1rem;
+}
+
+.padding-y-small {
+  padding: 0.5rem 0;
+}
+
+.padding-y-medium {
+  padding: 1rem 0;
+}
+
+.padding-y-large {
+  padding: 2rem 0;
+}
+
+.padding-y-larger {
+  padding: 3rem 0;
+}
+
+.padding-top-large {
+  padding-top: 2rem;
+}
+
+.padding-bottom-medium {
+  padding-bottom: 1rem;
 }
 
 h1,
@@ -24,7 +64,7 @@ h2 {
 }
 
 p {
-  font-size: 1.25rem;
+  font-size: 1.5rem;
 }
 
 *,
