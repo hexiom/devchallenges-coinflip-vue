@@ -11,6 +11,7 @@ defineProps<{
 </template>
 
 <style scoped>
+
 .btn {
   cursor: pointer;
   background-color: var(--color-accent);
@@ -19,7 +20,7 @@ defineProps<{
   font-size: 1.1rem;
   font-weight: 600;
   border-radius: 8px;
-  padding: 0.5em 2em;
+  padding: 0.75em 2.5em;
   box-shadow: 0px 4px 0px 0px var(--color-accent-dark);
 }
 
@@ -42,4 +43,5 @@ defineProps<{
   transform: translateY(4px);
   box-shadow: none;
 }
+
 </style>

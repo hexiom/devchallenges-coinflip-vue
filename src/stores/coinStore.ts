@@ -1,7 +1,7 @@
-import { flipCoin, getRandomBetween } from "@/util/util";
+import { flipCoin, flipWeightedCoin, getRandomBetween } from "@/util/util";
 import { defineStore } from "pinia";
 
-enum State {
+export enum State {
   Heads = 0,
   Tails = 1
 }
@@ -29,12 +29,12 @@ function getSpins(currentState: State, stateToReach: State) {
   // Likewise, if the state is not the same
   // We always want an odd number of spins.
   const isSame = (currentState === stateToReach)
-  // let spins = getRandomBetween(6, 12)
-  let spins = 3
+  let spins = getRandomBetween(2, 8)
+  const isOdd = (spins % 2 == 1)
 
   // Shifts the spins to be even
   // Or shifts it to be odd
-  if ((isSame && (spins & 1)) || (!isSame && !(spins & 1))) {
+  if ((isSame && isOdd) || (!isSame && !isOdd)) {
     spins++;
   }
   
@@ -86,7 +86,9 @@ export const useCoinFlipStore = defineStore<"coinFlip", CoinState, CoinGetters, 
     },
 
     startSpin() {
-      const headsOrTails = (flipCoin() as State)
+      // Nice weighted coin
+      // const headsOrTails = flipWeightedCoin(8, 2)
+      const headsOrTails = flipCoin()
 
       this.isSpinning = true
       this.currentSpins = 0

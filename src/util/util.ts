@@ -1,5 +1,18 @@
-export function flipCoin(): number {
-  return getRandomBetween(0, 1)
+import { State } from "@/stores/coinStore";
+
+export function flipCoin(): State {
+  return (getRandomBetween(0, 1) as State)
+}
+
+export function flipWeightedCoin(headsWeight: number, tailsWeight: number): State {
+  const totalWeight = (headsWeight + tailsWeight);
+  const rnd = getRandomBetween(0, totalWeight)
+
+  if (rnd < headsWeight) {
+    return State.Heads
+  }
+
+  return State.Tails
 }
 
 export function getRandomBetween(a: number, b: number): number {

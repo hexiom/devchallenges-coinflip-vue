@@ -7,7 +7,6 @@ import { useCoinFlipStore } from "@/stores/coinStore"
 import { getStateName } from "@/util/util"
 import { onMounted, useTemplateRef } from "vue"
 
-const imageRef = useTemplateRef("coin-img")
 const coinStore = useCoinFlipStore()
 const coinImages = [
   coinHeadsSvg,
@@ -30,7 +29,7 @@ function spinCoin() {
       <img class="shadow-img" :src="coinShadow" alt="">
     </div>
 
-    <p class="padding-top-medium padding-bottom-large">{{ getStateName(coinStore.face) }}</p>
+    <p class="coin-face">{{ getStateName(coinStore.face) }}</p>
 
     <Button :disabled="coinStore.isSpinning" @onclick="spinCoin">RANDOM</Button>
   </div>
@@ -42,22 +41,36 @@ function spinCoin() {
   padding-bottom: 2rem;
 }
 
+.coin-face {
+  padding-top: 1rem;
+  padding-bottom: 2rem;
+  font-size: 1.75rem;
+  letter-spacing: 0.03rem;
+}
+
 .coin-shadow {
   width: fit-content;
 }
 
 .spinning {
   animation: coin-flipping 0.5s linear infinite;
-  transition: transform 100ms linear;
 }
 
 @keyframes coin-flipping {
   0%, 100% {
     scale: 1 1 1;
+    transform: skewY(0);
+    filter: brightness(100%);
+  }
+
+  20% {
+    filter: brightness(100%)
   }
 
   50% {
     scale: 0 1 1;
+    transform: skewY(8deg);
+    filter: brightness(50%);
   }
 }
 </style>
