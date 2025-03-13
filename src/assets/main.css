@@ -6,6 +6,7 @@
   --color-dark: #35383F;
   --color-accent: #1F6FB0;
   --color-accent-dark: #23649b;
+  --color-btn-disabled: hsl(207, 47%, 28%);
   --font-family: "Kanit", var(--font-family-fallback);
   --font-family-fallback: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, sans-serif;
 }
@@ -41,12 +42,25 @@
   padding: 3rem 0;
 }
 
+.padding-top-medium {
+  padding-top: 1rem;
+}
+
 .padding-top-large {
   padding-top: 2rem;
 }
 
 .padding-bottom-medium {
   padding-bottom: 1rem;
+}
+
+.padding-bottom-large {
+  padding-bottom: 2rem;
+}
+
+button {
+  outline: 0;
+  border: 0;
 }
 
 h1,
