@@ -5,7 +5,9 @@ import coinShadow from "@/assets/svg/coin/shadow.svg"
 import Button from "./Button.vue"
 import { useCoinFlipStore } from "@/stores/coinStore"
 import { getStateName } from "@/util/util"
+import { onMounted, useTemplateRef } from "vue"
 
+const imageRef = useTemplateRef("coin-img")
 const coinStore = useCoinFlipStore()
 const coinImages = [
   coinHeadsSvg,
@@ -21,7 +23,7 @@ function spinCoin() {
 <template>
   <div class="centered coin-padding gap-medium">
     <div class="coin">
-      <img :class="{spinning: coinStore.isSpinning}" :src="coinImages[coinStore.face]" alt="">
+      <img ref="coin-img" :class="{spinning: coinStore.isSpinning}" :src="coinImages[coinStore.face]" alt="">
     </div>
 
     <div class="coin-shadow">
@@ -46,16 +48,16 @@ function spinCoin() {
 
 .spinning {
   animation: coin-flipping 0.5s linear infinite;
-  transition: rotate 100ms linear;
+  transition: transform 100ms linear;
 }
 
 @keyframes coin-flipping {
   0%, 100% {
-    transform: scaleX(1);
+    scale: 1 1 1;
   }
 
   50% {
-    transform: scaleX(0);
+    scale: 0 1 1;
   }
 }
 </style>

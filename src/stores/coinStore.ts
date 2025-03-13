@@ -62,11 +62,7 @@ export const useCoinFlipStore = defineStore<"coinFlip", CoinState, CoinGetters, 
 
     syncToAnimation(targetFace: number) {
       const timeForSpin = 0.5
-      const timeForRotation = 1
       const spinTime = timeForSpin*this.spinsToDo
-
-      console.log("TARGET:", targetFace)
-
       let faceChangeInterval: NodeJS.Timeout;
 
       // The first half-spin takes (timeForSpin / 2) seconds
@@ -79,12 +75,12 @@ export const useCoinFlipStore = defineStore<"coinFlip", CoinState, CoinGetters, 
         }
 
         this.swapFace()
-
         faceChangeInterval = setInterval(this.swapFace, timeForSpin*1000)
       }, (timeForSpin / 2)*1000)
 
       setTimeout(() => {
         clearInterval(faceChangeInterval)
+
         this.stopSpin(targetFace)
       }, spinTime*1000)
     },
