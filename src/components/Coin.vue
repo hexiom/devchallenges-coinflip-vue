@@ -39,6 +39,12 @@ function spinCoin() {
   background: transparent;
 }
 
+/* Don't make cursor into a pointer if disabled */
+.coin:disabled {
+  cursor: auto;
+}
+
+/* Hover effect of coin */
 .coin:not(:disabled):hover > img {
   filter: brightness(97%);
 }
