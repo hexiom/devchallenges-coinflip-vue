@@ -45,22 +45,22 @@ export const useCoinFlipStore = defineStore<"coinFlip", CoinState, CoinGetters, 
     isSpinning: false
   }),
 
-  getters: {
-
-  },
+  getters: {},
 
   actions: {
     swapFace() {
-      this.face = 1-this.face
+      this.face = (1 - this.face);
     },
 
     syncToAnimation(spins: number, targetFace: number) {
-      const timeForSpin = 0.5
-      const spinTime = timeForSpin*spins
+      // Also change the CSS variable in Coin.vue
+      // When you want to change timeForSpin
+      const timeForSpin = 0.5 
+      const spinTime = timeForSpin * spins
       let faceChangeInterval: NodeJS.Timeout;
 
-      // The first half-spin takes (timeForSpin / 2) seconds
-      // while every other spin takes (timeForSpin) seconds
+      // The first half-spin (when we need to change the face) takes "timeForSpin / 2" seconds
+      // while every other half-spin takes "timeForSpin" seconds
       setTimeout(() => {
         // Edge case if the spin time is less than timeForHalfSpin
         // Shouldn't happen though.
