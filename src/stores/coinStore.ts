@@ -69,7 +69,11 @@ export const useCoinFlipStore = defineStore<"coinFlip", CoinState, CoinGetters, 
         }
 
         this.swapFace()
-        faceChangeInterval = setInterval(this.swapFace, timeForSpin*1000)
+
+        // We swap the face 15ms earlier to make the transition smoother.
+        const timeForFaceChange = Math.max(0.01, timeForSpin - 0.015);
+
+        faceChangeInterval = setInterval(this.swapFace, timeForFaceChange * 1000)
       }, (timeForSpin / 2)*1000)
 
       setTimeout(() => {

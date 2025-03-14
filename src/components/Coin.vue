@@ -65,6 +65,7 @@ function spinCoin() {
 }
 
 .spinning {
+  perspective: 1000px;
   animation: coin-flipping var(--spin-time) linear infinite;
 }
 
@@ -84,18 +85,16 @@ function spinCoin() {
 
 @keyframes coin-flipping {
   0%, 100% {
-    scale: 1 1 1;
-    transform: skewY(0);
+    transform: rotateY(0deg);
     filter: brightness(100%);
   }
 
   20% {
-    filter: brightness(100%)
+    filter: brightness(100%);
   }
 
   50% {
-    scale: 0 1 1;
-    transform: skewY(8deg);
+    transform: rotateY(-90deg);
     filter: brightness(50%);
   }
 }
