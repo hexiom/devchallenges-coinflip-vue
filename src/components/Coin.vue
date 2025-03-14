@@ -22,11 +22,8 @@ function spinCoin() {
   <div class="centered coin-padding gap-medium">
     <button @click="spinCoin" :disabled="coinStore.isSpinning" aria-label="Coin" class="coin">
       <img ref="coin-img" :class="{spinning: coinStore.isSpinning}" :src="coinImages[coinStore.face]" alt="">
+      <img :class="{'shadow-spin': coinStore.isSpinning}" :src="coinShadow" alt="">
     </button>
-
-    <div class="coin-shadow">
-      <img class="shadow-img" :src="coinShadow" alt="">
-    </div>
 
     <p class="coin-face">{{ getStateName(coinStore.face) }}</p>
     <Button :disabled="coinStore.isSpinning" @onclick="spinCoin">RANDOM</Button>
@@ -35,6 +32,13 @@ function spinCoin() {
 
 <style>
 .coin {
+  --spin-time: 0.5s;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+
   cursor: pointer;
   background: transparent;
 }
@@ -61,12 +65,22 @@ function spinCoin() {
   letter-spacing: 0.03rem;
 }
 
-.coin-shadow {
-  width: fit-content;
+.spinning {
+  animation: coin-flipping var(--spin-time) linear infinite;
 }
 
-.spinning {
-  animation: coin-flipping 0.5s linear infinite;
+.shadow-spin {
+  animation: shadow-size var(--spin-time) linear infinite;
+}
+
+@keyframes shadow-size {
+  0%, 100% {
+    transform: scaleX(1);
+  }
+
+  50% {
+    transform: scaleX(0);
+  }
 }
 
 @keyframes coin-flipping {
