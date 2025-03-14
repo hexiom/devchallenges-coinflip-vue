@@ -4,8 +4,8 @@ import Coin from './components/Coin.vue';
 
 <template>
   <main class="centered">
-    <h1 class="padding-bottom-medium large-border">Flip the coin</h1>
-    <p>Press the coin or the button to flip the coin</p>
+    <h1 class="padding-bottom-medium no-wrap no-select large-border">Flip the coin</h1>
+    <p class="text-center">Press the coin or the button to flip the coin</p>
 
     <Coin />
   </main>
@@ -15,6 +15,18 @@ import Coin from './components/Coin.vue';
 
 main {
   height: 100%;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.no-wrap {
+  text-wrap: nowrap;
+}
+
+.no-select {
+  user-select: none;
 }
 
 .large-border {

@@ -5,7 +5,6 @@ import coinShadow from "@/assets/svg/coin/shadow.svg"
 import Button from "./Button.vue"
 import { useCoinFlipStore } from "@/stores/coinStore"
 import { getStateName } from "@/util/util"
-import { onMounted, useTemplateRef } from "vue"
 
 const coinStore = useCoinFlipStore()
 const coinImages = [
