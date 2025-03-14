@@ -86,16 +86,10 @@ function spinCoin() {
 @keyframes coin-flipping {
   0%, 100% {
     transform: rotateY(0deg);
-    filter: brightness(100%);
-  }
-
-  20% {
-    filter: brightness(100%);
   }
 
   50% {
     transform: rotateY(-90deg);
-    filter: brightness(50%);
   }
 }
 </style>
