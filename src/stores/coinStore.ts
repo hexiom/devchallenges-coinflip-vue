@@ -1,13 +1,13 @@
 import { flipCoin, flipWeightedCoin, getRandomBetweenInclusive } from "@/util/util";
 import { defineStore } from "pinia";
 
-export enum State {
+export enum Face {
   Heads = 0,
   Tails = 1
 }
 
 type CoinState = {
-  face: State,
+  face: Face,
   isSpinning: boolean
 }
 
@@ -16,15 +16,15 @@ type CoinGetters = {}
 type CoinActions = {
   swapFace: () => void,
   startSpin: () => void,
-  stopSpin: (landedOn: State) => void,
+  stopSpin: (landedOn: Face) => void,
   syncToAnimation: (spins: number, targetFace: number) => void
 }
 
-function getSpins(currentFace: State, targetFace: State) {
+function getSpins(currentFace: Face, targetFace: Face) {
   // When both the current face and the target face is the same
   // We always want an even number of spins.
 
-  // Likewise, if the state is not the same
+  // Likewise, if the faces are not the same
   // We always want an odd number of spins.
   const isSame = (currentFace === targetFace)
   let spins = getRandomBetweenInclusive(2, 8)
@@ -41,7 +41,7 @@ function getSpins(currentFace: State, targetFace: State) {
 
 export const useCoinFlipStore = defineStore<"coinFlip", CoinState, CoinGetters, CoinActions>("coinFlip", {
   state: (): CoinState => ({
-    face: State.Heads,
+    face: Face.Heads,
     isSpinning: false
   }),
 
@@ -89,7 +89,7 @@ export const useCoinFlipStore = defineStore<"coinFlip", CoinState, CoinGetters, 
       this.syncToAnimation(spins, headsOrTails)
     },
 
-    stopSpin(landedOn: State) {
+    stopSpin(landedOn: Face) {
       this.isSpinning = false
       this.face = landedOn
     }

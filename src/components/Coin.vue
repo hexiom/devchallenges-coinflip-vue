@@ -3,8 +3,8 @@ import coinHeadsSvg from "@/assets/svg/coin/heads.svg"
 import coinTailsSvg from "@/assets/svg/coin/tails.svg"
 import coinShadow from "@/assets/svg/coin/shadow.svg"
 import Button from "./Button.vue"
-import { State, useCoinFlipStore } from "@/stores/coinStore"
-import { flipCoin, flipWeightedCoin, getStateName } from "@/util/util"
+import { useCoinFlipStore } from "@/stores/coinStore"
+import { getFaceName } from "@/util/util"
 
 const coinStore = useCoinFlipStore()
 const coinImages = [
@@ -24,7 +24,7 @@ function spinCoin() {
       <img :class="{'shadow-spin': coinStore.isSpinning}" :src="coinShadow" alt="">
     </button>
 
-    <p class="coin-face">{{ getStateName(coinStore.face) }}</p>
+    <p class="coin-face">{{ getFaceName(coinStore.face) }}</p>
     <Button :disabled="coinStore.isSpinning" @onclick="spinCoin">RANDOM</Button>
   </div>
 </template>

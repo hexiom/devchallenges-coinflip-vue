@@ -1,23 +1,23 @@
-import { State } from "@/stores/coinStore";
+import { Face } from "@/stores/coinStore";
 
-export function flipCoin(): State {
-  return (getRandomBetweenInclusive(0, 1) as State)
+export function flipCoin(): Face {
+  return (getRandomBetweenInclusive(0, 1) as Face)
 }
 
 // Maybe will use in the future
-export function flipWeightedCoin(headsWeight: number, tailsWeight: number): State {
+export function flipWeightedCoin(headsWeight: number, tailsWeight: number): Face {
   const totalWeight = (headsWeight + tailsWeight);
   const rnd = getRandomBetween(0, totalWeight);
 
   if (rnd < headsWeight) {
-    return State.Heads;
+    return Face.Heads;
   }
 
-  return State.Tails;
+  return Face.Tails;
 }
 
-export function getStateName(value: State): string {
-  return (value == State.Heads ? "Heads" : "Tails");
+export function getFaceName(face: Face): string {
+  return (face == Face.Heads ? "Heads" : "Tails");
 }
 
 export function getRandomBetween(a: number, b: number): number {
