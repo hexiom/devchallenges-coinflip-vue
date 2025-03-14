@@ -3,8 +3,8 @@ import coinHeadsSvg from "@/assets/svg/coin/heads.svg"
 import coinTailsSvg from "@/assets/svg/coin/tails.svg"
 import coinShadow from "@/assets/svg/coin/shadow.svg"
 import Button from "./Button.vue"
-import { useCoinFlipStore } from "@/stores/coinStore"
-import { getStateName } from "@/util/util"
+import { State, useCoinFlipStore } from "@/stores/coinStore"
+import { flipCoin, flipWeightedCoin, getStateName } from "@/util/util"
 
 const coinStore = useCoinFlipStore()
 const coinImages = [
@@ -15,7 +15,6 @@ const coinImages = [
 function spinCoin() {
   coinStore.startSpin()
 }
-
 </script>
 
 <template>

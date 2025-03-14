@@ -1,4 +1,4 @@
-import { flipCoin, flipWeightedCoin, getRandomBetween } from "@/util/util";
+import { flipCoin, flipWeightedCoin, getRandomBetweenInclusive } from "@/util/util";
 import { defineStore } from "pinia";
 
 export enum State {
@@ -8,9 +8,7 @@ export enum State {
 
 type CoinState = {
   face: State,
-  isSpinning: boolean,
-  currentSpins: number,
-  spinsToDo: number
+  isSpinning: boolean
 }
 
 type CoinGetters = {}
@@ -19,36 +17,32 @@ type CoinActions = {
   swapFace: () => void,
   startSpin: () => void,
   stopSpin: (landedOn: State) => void,
-  syncToAnimation: (targetFace: number) => void
+  syncToAnimation: (spins: number, targetFace: number) => void
 }
 
-function getSpins(currentState: State, stateToReach: State) {
-  // When the state is the same (both heads or tails)
-  // We want an even number of spins.
+function getSpins(currentFace: State, targetFace: State) {
+  // When both the current face and the target face is the same
+  // We always want an even number of spins.
 
   // Likewise, if the state is not the same
   // We always want an odd number of spins.
-  const isSame = (currentState === stateToReach)
-  let spins = getRandomBetween(2, 8)
+  const isSame = (currentFace === targetFace)
+  let spins = getRandomBetweenInclusive(2, 8)
   const isOdd = (spins % 2 == 1)
 
-  // Shifts the spins to be even
-  // Or shifts it to be odd
+  // Shifts the spins to be even if both faces are the same
+  // Or shifts it to be odd if both faces are different
   if ((isSame && isOdd) || (!isSame && !isOdd)) {
     spins++;
   }
   
-  console.log("IS SAME:", isSame)
-  console.log("Spins:", spins);
   return spins
 }
 
 export const useCoinFlipStore = defineStore<"coinFlip", CoinState, CoinGetters, CoinActions>("coinFlip", {
   state: (): CoinState => ({
     face: State.Heads,
-    isSpinning: false,
-    currentSpins: 0,
-    spinsToDo: -1
+    isSpinning: false
   }),
 
   getters: {
@@ -60,9 +54,9 @@ export const useCoinFlipStore = defineStore<"coinFlip", CoinState, CoinGetters, 
       this.face = 1-this.face
     },
 
-    syncToAnimation(targetFace: number) {
+    syncToAnimation(spins: number, targetFace: number) {
       const timeForSpin = 0.5
-      const spinTime = timeForSpin*this.spinsToDo
+      const spinTime = timeForSpin*spins
       let faceChangeInterval: NodeJS.Timeout;
 
       // The first half-spin takes (timeForSpin / 2) seconds
@@ -86,21 +80,17 @@ export const useCoinFlipStore = defineStore<"coinFlip", CoinState, CoinGetters, 
     },
 
     startSpin() {
-      // Nice weighted coin
-      // const headsOrTails = flipWeightedCoin(8, 2)
+      // If I want to rig the coin for example.
+      // const headsOrTails = flipWeightedCoin(100, 0);
       const headsOrTails = flipCoin()
+      const spins = getSpins(this.face, headsOrTails)
 
       this.isSpinning = true
-      this.currentSpins = 0
-      this.spinsToDo = getSpins(this.face, headsOrTails)
-
-      this.syncToAnimation(headsOrTails)
+      this.syncToAnimation(spins, headsOrTails)
     },
 
     stopSpin(landedOn: State) {
       this.isSpinning = false
-      this.spinsToDo = -1
-
       this.face = landedOn
     }
   }
