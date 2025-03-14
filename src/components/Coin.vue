@@ -20,21 +20,29 @@ function spinCoin() {
 
 <template>
   <div class="centered coin-padding gap-medium">
-    <div class="coin">
+    <button @click="spinCoin" :disabled="coinStore.isSpinning" aria-label="Coin" class="coin">
       <img ref="coin-img" :class="{spinning: coinStore.isSpinning}" :src="coinImages[coinStore.face]" alt="">
-    </div>
+    </button>
 
     <div class="coin-shadow">
       <img class="shadow-img" :src="coinShadow" alt="">
     </div>
 
     <p class="coin-face">{{ getStateName(coinStore.face) }}</p>
-
     <Button :disabled="coinStore.isSpinning" @onclick="spinCoin">RANDOM</Button>
   </div>
 </template>
 
 <style>
+.coin {
+  cursor: pointer;
+  background: transparent;
+}
+
+.coin:not(:disabled):hover > img {
+  filter: brightness(97%);
+}
+
 .coin-padding {
   padding-top: 5em;
   padding-bottom: 2rem;
